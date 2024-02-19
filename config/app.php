@@ -161,7 +161,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MacroProvider::class,
-        App\Providers\LanguageServiceProvider::class
+        App\Providers\LanguageServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
     ])->toArray(),
 
     /*
@@ -176,7 +177,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'AppHelper' => App\Helpers\AppHelper::class,
+        'AppHelper'  => App\Helpers\AppHelper::class,
+        'JWTAuth'    => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ])->toArray(),
 
 ];

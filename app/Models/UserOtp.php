@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserOtp extends Model
 {
-    protected $fillable = ['code', 'used_at', 'user_id', 'secret'];
+    protected $fillable = ['code', 'used_at', 'user_id', 'secret', 'expire_at'];
+
+    protected $casts = [
+        'expire_at' => 'datetime',
+        'used_at'   => 'datetime',
+        'code'      => 'integer',
+        'user_id'   => 'integer'
+    ];
 
     public function user(): BelongsTo
     {

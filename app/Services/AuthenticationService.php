@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Events\Auth\UserRegisterEvent;
 use App\Helpers\AppHelper;
 use App\Models\User;
+use App\Models\UserOtp;
 use App\Notifications\sms\SendSmsOtpNotification;
 use Illuminate\Support\Facades\Log;
 
@@ -31,8 +32,8 @@ class AuthenticationService
         ]);
 
         AppHelper::isLocalMode()
-            ? $user->notify(new SendSmsOtpNotification($otp))
-            : Log::info('OTP: ' . $otp->code . ' hash ' . $otp->secret);
+            ? Log::info('OTP: ' . $otp->code . ' hash ' . $otp->secret)
+            : $user->notify(new SendSmsOtpNotification($otp));
 
 
         return [
@@ -41,8 +42,12 @@ class AuthenticationService
         ];
     }
 
-    public function verifyCode($data)
+    public function loginOtp($data)
     {
+        $otp = UserOtp::where('secret',$data['secret'])->first();
+
+        $otp->used_at = now();
+
 
     }
 }

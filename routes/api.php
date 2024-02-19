@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/request', [AuthController::class, 'request']);
+    Route::post('/login-otp', [AuthController::class, 'loginOtp']);
 });
 
 Route::group(['prefix' => 'test'], function () {

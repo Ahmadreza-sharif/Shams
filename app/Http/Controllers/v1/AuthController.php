@@ -4,7 +4,7 @@ namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Authentication\Request;
-use App\Http\Requests\Authentication\VerifyUserRequest;
+use App\Http\Requests\Authentication\LoginOtpRequest;
 use App\Services\AuthenticationService;
 use Illuminate\Support\Facades\Response;
 
@@ -22,9 +22,9 @@ class AuthController extends BaseController
         return Response::data($data, '');
     }
 
-    public function verify(VerifyUserRequest $request)
+    public function loginOtp(LoginOtpRequest $request)
     {
-        $data = $this->service->verifyCode($request->validated());
+        $data = $this->service->loginOtp($request->validated());
         return Response::data($data, '');
     }
 }

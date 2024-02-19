@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Authentication;
 
+use App\Rules\Auth\OtpExpireTimeRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class VerifyUserRequest extends FormRequest
+class LoginOtpRequest extends FormRequest
 {
 
     /**
@@ -15,8 +16,8 @@ class VerifyUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code'   => 'required|numeric|digits:6',
-            'secret' => 'required|string|exists:otp,secret'
+            'code'   => ['required', 'numeric', 'digits:6'],
+            'secret' => ['required', 'string', 'exists:user_otps,secret', new OtpExpireTimeRule()]
         ];
     }
 }
