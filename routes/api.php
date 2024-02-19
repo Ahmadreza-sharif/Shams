@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/request', [AuthController::class, 'request']);
+});
+
+Route::group(['prefix' => 'test'], function () {
+    Route::post('/', [TestController::class, 'index']);
 });

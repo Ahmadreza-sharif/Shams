@@ -4,8 +4,9 @@ namespace App\Http\Requests\Authentication;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Request extends FormRequest
+class VerifyUserRequest extends FormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -14,9 +15,9 @@ class Request extends FormRequest
     public function rules(): array
     {
         return [
-            'register_type' => ['required', 'in:email,mobile'],
-            'mobile'        => ['required', 'regex:^(?:0|98|\+98|\+980|0098|098|00980)?(9\d{9})^'],
-            'mobile_prefix' => ['required', 'string']
+            'code'   => 'required|numeric|digits:6',
+            'secret' => 'required|string|exists:otp,secret'
         ];
     }
 }
+
