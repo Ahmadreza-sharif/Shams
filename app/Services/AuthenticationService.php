@@ -7,7 +7,10 @@ use App\Helpers\AppHelper;
 use App\Models\User;
 use App\Models\UserOtp;
 use App\Notifications\sms\SendSmsOtpNotification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTFactory;
 
 class AuthenticationService
 {
@@ -44,9 +47,17 @@ class AuthenticationService
 
     public function loginOtp($data)
     {
-        $otp = UserOtp::where('secret',$data['secret'])->first();
+        $otp = UserOtp::where('secret', $data['secret'])->first();
 
         $otp->used_at = now();
+
+        $otp->user->update(
+            [
+                'mobile_verified_at' => now()
+            ]
+        );
+
+
 
 
     }

@@ -162,7 +162,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\MacroProvider::class,
         App\Providers\LanguageServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ])->toArray(),
 
     /*

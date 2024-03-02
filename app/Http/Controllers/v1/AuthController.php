@@ -27,4 +27,9 @@ class AuthController extends BaseController
         $data = $this->service->loginOtp($request->validated());
         return Response::data($data, '');
     }
+
+    public function loginPassword()
+    {
+
+    }
 }

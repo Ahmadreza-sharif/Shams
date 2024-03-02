@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'auth', 'excluded_middleware' => 'auth:api'], function () {
     Route::post('/request', [AuthController::class, 'request']);
     Route::post('/login-otp', [AuthController::class, 'loginOtp']);
+    Route::post('/login-password', [AuthController::class, 'loginPassword']);
 });
 
 Route::group(['prefix' => 'test'], function () {
