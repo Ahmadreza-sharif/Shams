@@ -9,6 +9,8 @@ use App\Models\UserOtp;
 use App\Notifications\sms\SendSmsOtpNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Spatie\FlareClient\Http\Exceptions\NotFound;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
@@ -49,6 +51,8 @@ class AuthenticationService
     {
         $otp = UserOtp::where('secret', $data['secret'])->first();
 
+        $this->validateOtp($data, $otp);
+
         $otp->used_at = now();
 
         $otp->user->update(
@@ -57,8 +61,22 @@ class AuthenticationService
             ]
         );
 
+        return $otp->user->getToken();
 
+    }
 
+    public function validateOtp($data, UserOtp $otp): void
+    {
+        if ($otp->expire_at <= now()) {
+            throw new BadRequestException(__('auth.expired_otp'));
+        }
 
+        if ($data['code'] != $otp->code) {
+            throw new BadRequestException(__('auth.invalid_otp'));
+        }
+
+        if ($otp->used_at != null) {
+            throw new BadRequestException(__('auth.expired_otp'));
+        }
     }
 }

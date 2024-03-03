@@ -4,7 +4,7 @@ namespace App\Http\Requests\Authentication;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginOtpRequest extends FormRequest
+class LoginPasswordRequest extends FormRequest
 {
 
     /**
@@ -15,9 +15,8 @@ class LoginOtpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code'   => ['required', 'numeric', 'digits:6'],
-            'secret' => ['required', 'string', 'exists:user_otps,secret']
+            //
         ];
     }
 }
-
+!!

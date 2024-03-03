@@ -12,7 +12,7 @@ class MacroProvider extends ServiceProvider
      */
     public function register(): void
     {
-        Response::macro('data', function ($data, $message) {
+        Response::macro('data', function ($message, $data = []) {
             return json_encode([
                 'message' => $message,
                 'data'    => $data

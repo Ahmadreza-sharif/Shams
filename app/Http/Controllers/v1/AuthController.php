@@ -19,13 +19,13 @@ class AuthController extends BaseController
     public function request(Request $request)
     {
         $data = $this->service->request($request->validated());
-        return Response::data($data, '');
+        return Response::data(__('auth.otp_code_send'), $data);
     }
 
     public function loginOtp(LoginOtpRequest $request)
     {
         $data = $this->service->loginOtp($request->validated());
-        return Response::data($data, '');
+        return Response::data(__('auth.phone_number_verified'), $data);
     }
 
     public function loginPassword()
