@@ -22,4 +22,8 @@ return [
     'expired_otp'           => 'کد منقضی شده است.',
     'otp_code_send'         => 'کد به شماره مورد نظر ارسال شد.',
     'phone_number_verified' => 'شماره موبایل با موفقیت اهراز هویت شد',
+    'login_successful'      => 'با موفقیت وارد شدید.',
+    'password_not_set'      => 'پسوردی برای این شماره وجود ندارد',
+    'password_incorrect'    => 'پسورد یا شماره تلفن اشتباه میباشد.',
+    'logout_successfully'   => 'با موفقیت از حساب کاربری خارج شدید.',
 ];

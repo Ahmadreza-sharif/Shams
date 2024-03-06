@@ -68,4 +68,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return JWTAuth::fromUser($this);
     }
+
+    public function findBy(string $field, $value)
+    {
+        return $this->where($field, );
+    }
 }

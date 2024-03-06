@@ -21,7 +21,8 @@ Route::group(['prefix' => 'auth', 'excluded_middleware' => 'auth:api'], function
     Route::post('/login-otp', [AuthController::class, 'loginOtp']);
     Route::post('/login-password', [AuthController::class, 'loginPassword']);
 });
+Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware(['auth:api']);
 
-Route::group(['prefix' => 'test'], function () {
+Route::group(['prefix' => 'test', 'excluded_middleware' => 'auth:api'], function () {
     Route::post('/', [TestController::class, 'index']);
 });

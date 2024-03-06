@@ -16,7 +16,10 @@ use Tymon\JWTAuth\Facades\JWTFactory;
 
 class AuthenticationService
 {
-    public function request($data)
+    /**
+     * @return array{secret: mixed, has_password: bool}
+     */
+    public function request($data): array
     {
         $user = User::where('mobile_number', $data['mobile'])->first();
 
@@ -47,7 +50,11 @@ class AuthenticationService
         ];
     }
 
-    public function loginOtp($data)
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function loginOtp($data): mixed
     {
         $otp = UserOtp::where('secret', $data['secret'])->first();
 
@@ -65,6 +72,11 @@ class AuthenticationService
 
     }
 
+    /**
+     * @param         $data
+     * @param UserOtp $otp
+     * @return void
+     */
     public function validateOtp($data, UserOtp $otp): void
     {
         if ($otp->expire_at <= now()) {
@@ -78,5 +90,35 @@ class AuthenticationService
         if ($otp->used_at != null) {
             throw new BadRequestException(__('auth.expired_otp'));
         }
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function loginPassword($data): mixed
+    {
+        $user = User::where('mobile_number', $data['mobile'])->first();
+
+        if ($user->password != null) {
+
+            $status = Auth::attempt(['mobile_number' => $user->mobile_number, 'password' => $data['password']]);
+
+            if ($status) {
+                return $user->getToken();
+            } else {
+                throw new BadRequestException(__('auth.password_incorrect'), 400);
+            }
+        }
+
+        throw new BadRequestException(__('auth.password_not_set'));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function logout(): mixed
+    {
+        return JWTAuth::parseToken()->invalidate(true);
     }
 }

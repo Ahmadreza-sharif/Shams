@@ -22,4 +22,8 @@ return [
     'expired_otp'           => 'otp has been expired',
     'otp_code_send'         => 'otp code has been sent.',
     'phone_number_verified' => 'phone number verified successfully.',
+    'login_successful'      => 'login was successful',
+    'password_not_set'      => 'password has not been set yet.',
+    'password_incorrect'    => 'phone number or password is incorrect.',
+    'logout_successfully'   => 'you logout from account successfully.'
 ];
