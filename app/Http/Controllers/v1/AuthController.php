@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Requests\Authentication\LoginOtpRequest;
 use App\Http\Requests\Authentication\LoginPasswordRequest;
 use App\Http\Requests\Authentication\Request;
-use App\Http\Requests\Authentication\LoginOtpRequest;
-use App\Services\AuthenticationService;
+use App\Services\AuthService\AuthenticationService;
 use Illuminate\Support\Facades\Response;
 
 class AuthController extends BaseController
 {
     public function __construct(
         private readonly AuthenticationService $service
-    )
-    {
-    }
+    ){}
 
     /**
      * @param Request $request

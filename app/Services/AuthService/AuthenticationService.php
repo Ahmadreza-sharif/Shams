@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AuthService;
 
 use App\Events\Auth\UserRegisterEvent;
 use App\Helpers\AppHelper;
@@ -9,10 +9,8 @@ use App\Models\UserOtp;
 use App\Notifications\sms\SendSmsOtpNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Spatie\FlareClient\Http\Exceptions\NotFound;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Facades\JWTFactory;
 
 class AuthenticationService
 {
