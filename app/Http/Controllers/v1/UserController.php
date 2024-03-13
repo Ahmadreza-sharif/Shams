@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Enums\LangOperationEnum;
+use App\Helpers\AppHelper;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\User\IndexUserResource;
@@ -18,7 +20,8 @@ class UserController extends BaseController
 
     public function index()
     {
-        return Response::data('', IndexUserResource::collection($this->service->paginate()));
+        $data = IndexUserResource::collection($this->service->paginate());
+        return Response::dataWithAdditional(AppHelper::generalLang(LangOperationEnum::INDEX->value,'user'), $data);
     }
 
     public function show()
