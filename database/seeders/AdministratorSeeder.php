@@ -1,13 +1,17 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Database\Migrations\Migration;
+namespace Database\Seeders;
 
-return new class extends Migration {
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class AdministratorSeeder extends Seeder
+{
     /**
-     * Run the migrations.
+     * Run the database seeds.
      */
-    public function up(): void
+    public function run(): void
     {
         User::create([
             'name'               => env('ADMINISTRATOR_NAME'),
@@ -16,15 +20,7 @@ return new class extends Migration {
             'email'              => env('ADMINISTRATOR_EMAIL'),
             'mobile_verified_at' => now(),
             'email_verified_at'  => now(),
-            'password'           => \Illuminate\Support\Facades\Hash::make(env('ADMINISTRATOR_PASSWORD'))
+            'password'           => \Illuminate\Support\Facades\Hash::make(env('ADMINISTRATOR_PASSWORD')),
         ]);
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-
-    }
-};
+}

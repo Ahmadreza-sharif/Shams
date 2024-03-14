@@ -11,6 +11,7 @@ class IndexUserResource extends JsonResource
     {
         return [
             'name'          => $this->name,
+            'uuid'          => $this->uuid,
             'mobile_number' => $this->mobile_number,
             'mobile_prefix' => $this->mobile_prefix,
             'created_at'    => $this->created_at

@@ -28,6 +28,6 @@ Route::group(['prefix' => 'test', 'excluded_middleware' => 'auth:api'], function
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::apiResource('user', UserController::class);
+    Route::apiResource('user', UserController::class)->parameter('user', 'user:uuid');
     Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware(['auth:api']);
 });

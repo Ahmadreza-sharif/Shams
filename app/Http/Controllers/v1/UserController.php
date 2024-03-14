@@ -7,6 +7,8 @@ use App\Helpers\AppHelper;
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\User\IndexUserResource;
+use App\Http\Resources\User\ShowUserResource;
+use App\Models\User;
 use App\Services\UserService\UserService;
 use Illuminate\Support\Facades\Response;
 
@@ -21,12 +23,12 @@ class UserController extends BaseController
     public function index()
     {
         $data = IndexUserResource::collection($this->service->paginate());
-        return Response::dataWithAdditional(AppHelper::generalLang(LangOperationEnum::INDEX->value,'user'), $data);
+        return Response::dataWithAdditional(AppHelper::generalLang(LangOperationEnum::INDEX->value, 'user'), $data);
     }
 
-    public function show()
+    public function show(User $user)
     {
-
+        return Response::data(AppHelper::generalLang(LangOperationEnum::SHOW->value, 'user'), ShowUserResource::make($user));
     }
 
     public function store(StoreUserRequest $request)
