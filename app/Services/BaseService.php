@@ -9,7 +9,7 @@ use Illuminate\Database\Schema\Builder;
 
 class BaseService
 {
-    public function __construct(private readonly Model $model)
+    public function __construct(public Model $model)
     {
     }
 
@@ -26,6 +26,11 @@ class BaseService
     public function update($payload, $eloquent)
     {
         return $eloquent->update($payload);
+    }
+
+    public function destroy($eloquent)
+    {
+        return $eloquent->delete();
     }
 
     public function find(string $value, string $field, bool $firstOrFail)
@@ -48,6 +53,12 @@ class BaseService
         } else {
             return $this->query($payload)->paginate($limit);
         }
+    }
 
+    public function toggle($eloquent, $field)
+    {
+        $eloquent->$field = !$eloquent->$field;
+        $eloquent->save();
+        return $eloquent;
     }
 }

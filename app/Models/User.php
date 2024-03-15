@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuid;
+    use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
 
 
     public static function boot()
@@ -40,6 +40,7 @@ class User extends Authenticatable implements JWTSubject
         'mobile_prefix',
         'email_verified_at',
         'mobile_verified_at',
+        'block',
     ];
 
     /**
@@ -58,8 +59,12 @@ class User extends Authenticatable implements JWTSubject
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password'          => 'hashed',
+        'email_verified_at'  => 'datetime',
+        'mobile_verified_at' => 'datetime',
+        'password'           => 'hashed',
+        'block'              => 'boolean',
+        'mobile_number'      => 'string',
+        'mobile_prefix'      => 'string',
     ];
 
     public function otp(): HasMany

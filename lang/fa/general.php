@@ -4,7 +4,9 @@ use App\Enums\LangOperationEnum;
 
 return [
     'attributes' => [
-        'user' => 'کاربر'
+        'user'     => 'کاربر',
+        'active'   => 'فعال',
+        'inactive' => 'غیرفعال'
     ],
 
     'general_operations' => [
