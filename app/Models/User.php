@@ -17,16 +17,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
 
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->uuid = Str::uuid();
-        });
-    }
-
     /**
      * The attributes that are mass assignable.
      *

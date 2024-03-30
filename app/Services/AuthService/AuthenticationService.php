@@ -37,7 +37,7 @@ class AuthenticationService
             'expire_at' => now()->addMinutes(5),
         ]);
 
-        AppHelper::isLocalMode()
+        isLocalMode()
             ? Log::info('OTP: ' . $otp->code . ' hash ' . $otp->secret)
             : $user->notify(new SendSmsOtpNotification($otp));
 

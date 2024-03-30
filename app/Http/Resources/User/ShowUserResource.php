@@ -24,7 +24,7 @@ class ShowUserResource extends JsonResource
             'email_verified_at'  => $this->email_verified_at,
             'email'              => $this->email,
             'created_at'         => $this->created_at,
-            'block'              => AppHelper::BooleanFormatResponse($this->block)
+            'block'              => BooleanFormatResponse($this->block)
         ];
     }
 }

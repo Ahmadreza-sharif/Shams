@@ -16,7 +16,7 @@ class IndexUserResource extends JsonResource
             'mobile_number' => $this->mobile_number,
             'mobile_prefix' => $this->mobile_prefix,
             'created_at'    => $this->created_at,
-            'block'         => AppHelper::BooleanFormatResponse($this->block)
+            'block'         => BooleanFormatResponse($this->block)
         ];
     }
 }

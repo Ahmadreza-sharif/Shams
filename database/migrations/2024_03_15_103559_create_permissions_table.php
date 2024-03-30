@@ -10,9 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->softDeletes();
-            $table->boolean('block')->default(false);
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->id();
+            $table->string('key')->unique();
+            $table->uuid();
+            $table->timestamps();
         });
     }
 
@@ -21,9 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('deleted_at');
-            $table->dropColumn('block');
-        });
+        Schema::dropIfExists('permissions');
     }
 };

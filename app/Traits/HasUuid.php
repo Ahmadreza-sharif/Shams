@@ -2,9 +2,11 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Str;
+
 trait HasUuid
 {
-    protected static function boot(): void
+    public static function boot()
     {
         parent::boot();
 
