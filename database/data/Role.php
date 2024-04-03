@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'translation' => [
+        'translations' => [
             'fa' => [
                 'title' => 'ادمین'
             ],
@@ -13,7 +13,7 @@ return [
         'updatable'   => true,
     ],
     [
-        'translation' => [
+        'translations' => [
             'fa' => [
                 'title' => 'مالک'
             ],

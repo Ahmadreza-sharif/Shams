@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             AdministratorSeeder::class,
             UserSeeder::class,
             SmsSeeder::class,
+            PermissionSeeder::class,
             RoleSeeder::class,
         ]);
 

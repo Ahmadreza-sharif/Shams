@@ -21,8 +21,15 @@ class TranslationService
     }
 
 
-//    public static function get($eloquent, $key)
-//    {
-//        return $eloquent->
-//    }
+    public static function get($eloquent, $key = null)
+    {
+
+        $translation = $eloquent->translations()->where('locale', app()->getLocale())->first();
+
+        if ($key == null) {
+            return $translation->toArray();
+        }
+
+        return $translation->first()->$key;
+    }
 }

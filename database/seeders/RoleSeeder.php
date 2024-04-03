@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
                 'updatable' => $item['updatable']
             ]);
 
-            TranslationService::translate($role, $item);
+            TranslationService::translate($role, $item['translations']);
         });
     }
 }

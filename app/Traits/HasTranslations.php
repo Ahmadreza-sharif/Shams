@@ -2,17 +2,18 @@
 
 namespace App\Traits;
 
+use App\Models\Translation;
 use App\Services\TranslationService\TranslationService;
 
 trait HasTranslations
 {
     public function translations()
     {
-        return $this->morphMany(self::class);
+        return $this->morphMany(Translation::class, 'translatable');
     }
 
     public function getTitleAttribute()
     {
-        return TranslationService::get($this, 'title');
+        return $this->translations()->where('locale', app()->getLocale())->first()->title;
     }
 }

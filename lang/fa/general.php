@@ -6,7 +6,8 @@ return [
     'attributes' => [
         'user'     => 'کاربر',
         'active'   => 'فعال',
-        'inactive' => 'غیرفعال'
+        'inactive' => 'غیرفعال',
+        'role'     => 'نقش',
     ],
 
     'general_operations' => [
