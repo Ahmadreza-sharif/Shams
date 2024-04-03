@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\RoleController;
 use App\Http\Controllers\v1\TestController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;

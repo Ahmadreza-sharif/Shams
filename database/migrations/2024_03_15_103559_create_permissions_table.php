@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique();
+            $table->foreignId('parent_id')->nullable()->constrained('permissions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->uuid();
             $table->timestamps();
         });

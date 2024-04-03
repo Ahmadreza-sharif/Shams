@@ -8,6 +8,7 @@ enum PermissionEnum: string
 {
     use EnumToArray;
 
+    case USER = 'user';
     case USER_INDEX = 'user_index';
     case USER_STORE = 'user_store';
     case USER_SHOW = 'user_show';

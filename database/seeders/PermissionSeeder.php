@@ -18,11 +18,24 @@ class PermissionSeeder extends Seeder
 
         $permissions->each(function ($item) {
 
-            $permission = Permission::create([
-                'key' => $item['key']
-            ]);
 
-            TranslationService::translate($permission, $item['translations']);
+            $parentPermission = $this->createPermission($item);
+
+            foreach ($item['permissions'] as $permission) {
+                $test = $this->createPermission($permission, $parentPermission->id);
+            }
         });
+    }
+
+    private function createPermission($permission, $parentId = null)
+    {
+        $object = Permission::create([
+            'key'       => $permission['key'],
+            'parent_id' => $parentId
+        ]);
+
+        TranslationService::translate($object, $permission['translations']);
+
+        return $object;
     }
 }

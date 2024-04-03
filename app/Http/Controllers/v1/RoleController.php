@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\v1;
 
 use App\Enums\LangOperationEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Resources\Role\IndexRoleResource;
-use App\Models\User;
+use App\Http\Resources\Role\ShowRoleResource;
+use App\Models\Role;
 use App\Services\RoleService\RoleService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 class RoleController extends Controller
@@ -32,9 +33,9 @@ class RoleController extends Controller
 
     }
 
-    public function show()
+    public function show(Role $role)
     {
-
+        return Response::data(generalLang(LangOperationEnum::SHOW, 'role'), ShowRoleResource::make($role));
     }
 
     public function destroy()
