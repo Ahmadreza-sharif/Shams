@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->uuid();
             $table->boolean('deletable');
             $table->boolean('updatable');
+            $table->string('key')->unique()->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

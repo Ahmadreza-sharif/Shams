@@ -13,12 +13,14 @@ class IndexRoleResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
+
     {
         return [
-            'title'     => $this->title,
-            'uuid'      => $this->uuid,
-            'deletable' => $this->deletable,
-            'updatable' => $this->updatable,
+            'uuid'        => $this->uuid,
+            'title'       => $this->title,
+            'description' => $this->translation->description,
+            'deletable'   => $this->deletable,
+            'updatable'   => $this->updatable,
         ];
     }
 }

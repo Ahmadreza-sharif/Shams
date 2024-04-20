@@ -19,6 +19,7 @@ class UserController extends BaseController
         private readonly UserService $service,
     )
     {
+        $this->authorizeResource(User::class);
     }
 
     public function index()
@@ -59,6 +60,6 @@ class UserController extends BaseController
     public function me()
     {
         $user = \Auth::user();
-        return Response::data(generalLang(LangOperationEnum::SHOW,'user'),ShowUserResource::make($user));
+        return Response::data(generalLang(LangOperationEnum::SHOW, 'user'), ShowUserResource::make($user));
     }
 }

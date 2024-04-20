@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Schema\Builder;
 
 class BaseService
 {
@@ -13,7 +13,7 @@ class BaseService
     {
     }
 
-    public function query(array $payload = []): \Illuminate\Database\Eloquent\Builder
+    public function query(array $payload = []): Builder
     {
         return $this->model->query();
     }

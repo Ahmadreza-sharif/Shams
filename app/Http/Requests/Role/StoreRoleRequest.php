@@ -15,8 +15,11 @@ class StoreRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title'         => ['min:2', 'max:256', 'required'],
+            'description'   => ['min:2', '564', 'nullable'],
+            'permissions'   => ['array'],
+            'permissions.*' => ['uuid','exists:permissions,uuid']
         ];
     }
 }
-!!
+

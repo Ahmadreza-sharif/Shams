@@ -81,5 +81,84 @@ return [
                 'key'          => PermissionEnum::USER_TOGGLE->value
             ],
         ]
+    ],
+    [
+        'translations' => [
+            'fa' => [
+                'title' => 'نقش ها'
+            ],
+            'en' => [
+                'title' => 'roles'
+            ]
+        ],
+        'key'          => PermissionEnum::ROLE->value,
+        'permissions'  => [
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'لیست نقش ها'
+                    ],
+                    'en' => [
+                        'title' => 'roles index'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_INDEX->value
+            ],
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'جزئیات نقش'
+                    ],
+                    'en' => [
+                        'title' => 'role details'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_SHOW->value
+            ],
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'حذف نقش'
+                    ],
+                    'en' => [
+                        'title' => 'delete role'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_DESTROY->value
+            ],
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'اپدیت نقش'
+                    ],
+                    'en' => [
+                        'title' => 'update role'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_UPDATE->value
+            ],
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'ذخیره نقش'
+                    ],
+                    'en' => [
+                        'title' => 'store role'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_STORE->value
+            ],
+            [
+                'translations' => [
+                    'fa' => [
+                        'title' => 'تغییر وضعیت نقش'
+                    ],
+                    'en' => [
+                        'title' => 'toggle role'
+                    ]
+                ],
+                'key'          => PermissionEnum::ROLE_TOGGLE->value
+            ],
+        ]
     ]
 ];

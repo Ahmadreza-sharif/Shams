@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\HasPermission;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes, HasPermission;
 
     /**
      * The attributes that are mass assignable.
@@ -77,13 +79,13 @@ class User extends Authenticatable implements JWTSubject
         return JWTAuth::fromUser($this);
     }
 
-    public function role(): HasMany
+    public function roles(): MorphToMany
     {
-        return $this->hasMany(Role::class);
+        return $this->morphToMany(Role::class, 'model', 'model_has_role');
     }
 
-    public function permission(): HasMany
+    public function permissions(): MorphToMany
     {
-        return $this->hasMany(Permission::class);
+        return $this->morphToMany(Permission::class, 'model', 'model_has_permission');
     }
 }
