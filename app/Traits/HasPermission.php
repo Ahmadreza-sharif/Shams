@@ -6,14 +6,14 @@ use App\Models\User;
 
 trait HasPermission
 {
-    public function hasPermission(array $permissions): bool
+    public function hasPermissionTo(array $permissions): bool
     {
         $hasPermission = $this->permissions()->whereIn('key', $permissions)->exists();
 
-        $hasRoles = $this->whereHas('roles.permissions', function ($query) use ($permissions) {
-            $query->whereIn('key', $permissions);
+        $hasRole = $this->roles()->whereHas('permissions', function ($q) use ($permissions) {
+            $q->whereIn('key', $permissions);
         })->exists();
 
-        return $hasPermission || $hasRoles;
+        return $hasPermission || $hasRole;
     }
 }

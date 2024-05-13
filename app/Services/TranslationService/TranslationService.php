@@ -6,18 +6,13 @@ use App\Models\Translation;
 
 class TranslationService
 {
-    public static function translate($eloquent, array $data)
+    public static function translate($eloquent, array $data): void
     {
-        foreach ($data as $locale => $translation) {
-            Translation::create([
-                'title'             => $translation['title'] ?? null,
-                'locale'            => $locale,
-                'summery'           => $translation['summery'] ?? null,
-                'description'       => $translation['description'] ?? null,
-                'translatable_id'   => $eloquent->id,
-                'translatable_type' => $eloquent::class
-            ]);
+        if ($eloquent->translation) {
+            $eloquent->translations()->delete();
         }
+
+        self::storeTranslations($eloquent, $data['translations']);
     }
 
 
@@ -31,5 +26,19 @@ class TranslationService
         }
 
         return $translation->first()->$key;
+    }
+
+    public static function storeTranslations($eloquent, $data): void
+    {
+        foreach ($data as $locale => $translation) {
+            Translation::create([
+                'title'             => $translation['title'] ?? null,
+                'locale'            => $locale,
+                'summery'           => $translation['summery'] ?? null,
+                'description'       => $translation['description'] ?? null,
+                'translatable_id'   => $eloquent->id,
+                'translatable_type' => $eloquent::class
+            ]);
+        }
     }
 }

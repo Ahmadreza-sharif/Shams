@@ -51,3 +51,8 @@ function SeederData($title): Collection
 {
     return collect(include_once app_path() . "/../database/data/$title.php");
 }
+
+function getQuery($query): string
+{
+    return Str::replaceArray('?', $query->getBindings(), $query->toSql());
+}

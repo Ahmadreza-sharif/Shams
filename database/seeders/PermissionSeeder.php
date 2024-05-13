@@ -34,7 +34,7 @@ class PermissionSeeder extends Seeder
             'parent_id' => $parentId
         ]);
 
-        TranslationService::translate($object, $permission['translations']);
+        TranslationService::translate($object, $permission);
 
         return $object;
     }

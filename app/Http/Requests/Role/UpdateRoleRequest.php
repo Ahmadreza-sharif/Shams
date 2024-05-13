@@ -4,7 +4,7 @@ namespace App\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoleRequest extends FormRequest
+class UpdateRoleRequest extends FormRequest
 {
 
     /**
@@ -18,9 +18,8 @@ class StoreRoleRequest extends FormRequest
             'translations'                                        => ['required', 'array'],
             'translations.' . app()->getLocale() . '.title'       => ['required', 'min:2', 'max:256'],
             'translations.' . app()->getLocale() . '.description' => ['min:2', 'max:564', 'nullable'],
-            'permissions'                                         => ['array'],
-            'permissions.*'                                       => ['uuid', 'exists:permissions,uuid']
+            'permissions'                                         => ['array', 'required'],
+            'permissions.*'                                       => ['uuid', 'exists:permissions,uuid', 'required']
         ];
     }
 }
-

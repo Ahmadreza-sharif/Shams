@@ -30,4 +30,9 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class, 'role_permission');
     }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->translations()->where('locale', app()->getLocale())->first()->description;
+    }
 }

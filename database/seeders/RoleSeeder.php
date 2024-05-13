@@ -26,7 +26,7 @@ class RoleSeeder extends Seeder
 
             $role->permissions()->attach($permissions->pluck('id')->toArray());
 
-            TranslationService::translate($role, $item['translations']);
+            TranslationService::translate($role, $item);
         });
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->boolean('deletable');
-            $table->boolean('updatable');
+            $table->boolean('deletable')->default(true);
+            $table->boolean('updatable')->default(true);
             $table->string('key')->unique()->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -17,7 +17,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        $permissions = IndexPermissionResource::collection($this->service->getParentPermissions());
+        $permissions = IndexPermissionResource::collection($this->service->paginate());
         return Response::dataWithAdditional(generalLang(LangOperationEnum::INDEX, 'permission'), $permissions);
     }
 }

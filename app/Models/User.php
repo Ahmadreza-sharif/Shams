@@ -6,6 +6,7 @@ use App\Traits\HasPermission;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -81,7 +82,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function roles(): MorphToMany
     {
-        return $this->morphToMany(Role::class, 'model', 'model_has_role');
+        return $this->morphToMany(Role::class, 'model','model_has_role');
     }
 
     public function permissions(): MorphToMany

@@ -33,13 +33,20 @@ class BaseService
         return $eloquent->delete();
     }
 
-    public function find(string $value, string $field, bool $firstOrFail)
+    public function find(mixed $value, string $field, bool $firstOrFail = false)
     {
-        return $this->query()->where($field, $value)->when($firstOrFail, function ($q) {
-            $q->firstOrFail();
-        }, function ($q) {
-            $q->first();
-        });
+        $query = $this->query()
+                      ->when(is_array($value), function (Builder $query) use ($field, $value) {
+                          $query->whereIn($field, $value);
+                      }, function (Builder $query) use ($field, $value) {
+                          $query->where($field, $value);
+                      });
+
+        if ($firstOrFail) {
+            return $query->firstOrFail();
+        } else {
+            return $query->get();
+        }
     }
 
     public function paginate(array $payload = []): Collection|LengthAwarePaginator|array

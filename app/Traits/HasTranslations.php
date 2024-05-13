@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\Translation;
 use App\Services\TranslationService\TranslationService;
+use Illuminate\Database\Eloquent\Collection;
 
 trait HasTranslations
 {

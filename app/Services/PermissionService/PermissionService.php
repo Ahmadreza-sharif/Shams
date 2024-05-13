@@ -15,7 +15,6 @@ class PermissionService extends BaseService
     public function getParentPermissions()
     {
         $query = $this->query()->whereNull('parent_id');
-        $this->model = $query;
         return $this->paginate();
     }
 }
