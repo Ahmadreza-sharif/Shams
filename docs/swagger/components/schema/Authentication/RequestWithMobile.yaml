@@ -1,0 +1,12 @@
+title: Request With Mobile
+properties:
+  register_type:
+    type: string
+  mobile_prefix:
+    type: string
+  mobile:
+    type: string
+required:
+  - register_type
+  - mobile_prefix
+  - mobile

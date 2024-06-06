@@ -8,6 +8,7 @@ return [
         'active'   => 'فعال',
         'inactive' => 'غیرفعال',
         'role'     => 'نقش',
+        'category' => 'دسته بندی'
     ],
 
     'general_operations' => [

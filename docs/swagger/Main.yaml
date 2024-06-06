@@ -1,0 +1,135 @@
+openapi: 3.0.3
+
+info:
+  title: Ecommerce Swagger Api
+  description: This is api documentation for Ecommerce
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8000/api/v1'
+    description: Local Server Without Docker
+  - url: 'https://{domain}/api/v1'
+    variables:
+      domain:
+        default: 'localhost'
+        enum:
+          - 'localhost'
+          - 'metanextdev.com'
+      port:
+        default: 8000
+        enum:
+          - 8000
+          - 8080
+    description: Local Server with Docker
+  - url: 'https://{productionDomain}/api/v1'
+    description: Production Server
+    variables:
+      productionDomain:
+        default: 'production.com'
+        enum:
+          - 'production.com'
+          - 'metanextdev.com'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Authentication
+    description: All the authentication apis
+
+paths:
+  /auth/request:
+    post:
+      summary: Request for token and entering phone number or email
+      description: login with mobile
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                title: Response
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'message of response according to the lang'
+                  data:
+                    type: object
+                    properties:
+                      secret:
+                        type: string
+                        example: 'ff81061bf28118a196dad7a4be9d874bd5dcc0b57745dd9216d010f4d0f4884a'
+                      has_password:
+                        type: boolean
+                        example: true
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
+        - in: header
+          name: Accept-Charset
+          required: true
+          schema:
+            type: string
+            example: application/json
+        - in: header
+          name: Accept-Language
+          required: true
+          schema:
+            type: string
+            enum:
+              - FA
+              - EN
+            example: FA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              Request With Mobile:
+                value:
+                  register_type: mobile
+                  mobile_prefix: '+98'
+                  mobile: '9100000000'
+              Request With Email:
+                value:
+                  register_type: email
+                  email: sharif.org@yahoo.com
+            schema:
+              type: object
+              oneOf:
+                - $ref: './components/schema/Authentication/RequestWithMobile.yaml'
+                - $ref: './components/schema/Authentication/RequestWithEmail.yaml'
+  /auth/login-password:
+    post:
+      tags:
+        - Authentication
+      summary: Login with password
+      description: you can login when login_password parameter in response of /auth/request be true
+      responses:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: Login with password
+              type: object
+              properties:
+                mobile:
+                  type: string
+                  example: '9100000000'
+                password:
+                  type: string
+                  example: 'secret'
+              required:
+                - password
+                - mobile

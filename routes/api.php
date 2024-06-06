@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\AuthController;
+use App\Http\Controllers\v1\CategoryController;
 use App\Http\Controllers\v1\PermissionController;
 use App\Http\Controllers\v1\RoleController;
 use App\Http\Controllers\v1\TestController;
@@ -39,4 +40,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::apiResource('role', RoleController::class)->parameter('role', 'role:uuid');
     Route::apiResource('permission', PermissionController::class)->parameter('permission', 'permission:uuid');
+    Route::apiResource('category', CategoryController::class)->parameter('category', 'category:uuid');
 });

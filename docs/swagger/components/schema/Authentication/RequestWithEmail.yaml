@@ -1,0 +1,10 @@
+title: Request With Email
+properties:
+  register_type:
+    type: string
+  email:
+    type: string
+required:
+  - register_type
+  - mobile_prefix
+  - mobile
